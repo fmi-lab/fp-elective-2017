@@ -11,6 +11,6 @@
    (check = (expt 5 3) 125)
    (check = (expt 2 10) 1024)
    (check = (expt -2 10) 1024)
-   (check = (expt -2 11) 2048)))
+   (check = (expt -2 11) -2048)))
 
 (run-tests expt-tests)
