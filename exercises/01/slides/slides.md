@@ -117,6 +117,10 @@ of everything but the cost of nothing.”
 
 ---
 
+![center](images/tree.png)
+
+---
+
 ![center](images/tree-accumulation.png)
 
 ---
