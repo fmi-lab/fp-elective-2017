@@ -1,5 +1,3 @@
-<!-- $theme: default -->
-
 <style type="text/css">
 html, body, div, p { font-family: Helvetica; }
 </style>
@@ -18,9 +16,9 @@ https://repl.it/languages/scheme
 
 Всеки мощен език за програмиране ни дава 3 основни средства за организация на нашите идеи при решаването на даден проблем:
 
-- **примитивни изрази** - най-простите елементи
-- **средства за комбинация** - за създаване на съставни елементи от по-прости
-- **средства за абстракция** - за именуване на съставни елементи, които да използваме като примитивните елементи
+- **примитивни изрази** – най-простите елементи
+- **средства за комбинация** – за създаване на съставни елементи от по-прости
+- **средства за абстракция** – за именуване на съставни елементи, които да използваме като примитивните елементи
 
 ---
 
@@ -32,9 +30,9 @@ Infix notation
 ```
 
 Prefix notation
-```Scheme
+```scheme
 (+ 1 2)
-(+ 1 2 3 4 5) ;повече аргументи
+(+ 1 2 3 4 5) ; повече аргументи
 ```
 
 ---
@@ -43,7 +41,7 @@ Prefix notation
 
 ## Примитивните изрази в езика
 
-```Scheme
+```scheme
 42
 3.14
 #t
@@ -60,16 +58,15 @@ Prefix notation
 
 ## Средствата за комбинация в езика
 
-```Scheme
+```scheme
 (operation operand1 operand2 ...)
 ```
 
-```Scheme
+```scheme
 (sum-of-squares 2 3)
 ```
 
-
-```Scheme
+```scheme
 (+ (* 2 2) (* 3 3))
 ```
 
@@ -95,7 +92,7 @@ Prefix notation
 of everything but the cost of nothing.”
 --
 *<div style="text-align: right">Alan Perlis
- (paraphrasing Oscar Wilde)</div>*
+(paraphrasing Oscar Wilde)</div>*
 
 ---
 
@@ -113,46 +110,46 @@ of everything but the cost of nothing.”
 
 # Оценете комбинацията
 
-```Scheme
+```scheme
 (* (+ 2 (* 4 6))
    (+ 3 5 7))
 ```
 
 ---
 
-# TODO: add new diagram
-
-![center 150%](images/tree-accumulation.png)
+![center](images/tree-accumulation.png)
 
 ---
 
 # Именуване на израз
+
 ## Средство за абстракция
 
-```Scheme
+```scheme
 (define grade 6)
 ```
 
-```Scheme
+```scheme
 (define answer
   (+ 3
      (* 3 13)))
 ```
 
-```Scheme
+```scheme
 (define + -)
 ```
 
 ---
 
 # Дефиниране на процедура
+
 ## По-мощно средство за абстракция
 
 ![150%](images/square.png)
 
-<br/>
+<br>
 
-```Scheme
+```scheme
 (define (sum-of-squares x y)
   (+ (square x) (square y)))
 ```
@@ -161,14 +158,14 @@ of everything but the cost of nothing.”
 
 # Прилагане на процедура
 
-```Scheme
-(square 7) ;49
+```scheme
+(square 7) ; 49
 ```
 
-```Scheme
-(sum-of-squares 3 4) ;25
+```scheme
+(sum-of-squares 3 4) ; 25
 ```
 
-```Scheme
-(sum-of-squares (+ 1 2) (* 2 2)) ;25
+```scheme
+(sum-of-squares (+ 1 2) (* 2 2)) ; 25
 ```
