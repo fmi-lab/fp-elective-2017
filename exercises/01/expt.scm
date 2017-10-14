@@ -1,5 +1,11 @@
 (require rackunit rackunit/text-ui)
 
+(define (expt base exponent)
+  (if (= exponent 0)
+      1
+      (* base
+         (expt base (- exponent 1)))))
+
 (define expt-tests
   (test-suite
    "Tests for expt"
