@@ -9,7 +9,7 @@
    (check = (count-divisors 3) 2) ; 1 3
    (check = (count-divisors 12) 6) ; 1 2 3 4 6 12
    (check = (count-divisors 15) 4) ; 1 3 5 15
-   (check = (sum-divisors 19) 2) ; 1 19
+   (check = (count-divisors 19) 2) ; 1 19
    (check = (count-divisors 42) 8) ; 1 2 3 6 7 14 21 42
    (check = (count-divisors 661) 2) ; 1 661
    (check = (count-divisors 666) 8) ; 1 2 4 8 83 166 332 664
