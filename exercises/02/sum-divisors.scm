@@ -1,6 +1,14 @@
 (require rackunit rackunit/text-ui)
 
-
+(define (sum-divisors n)
+  (define (helper iter result)
+    (if (= iter 0)
+        result
+        (helper (- iter 1)
+                (if (= (remainder n iter) 0)
+                    (+ result iter)
+                    result))))
+  (helper n 0))
 
 (define sum-divisors-tests
   (test-suite

@@ -1,6 +1,14 @@
 (require rackunit rackunit/text-ui)
 
-
+; Докато изчерпваме цифрите от iter, ги слагаме в result
+(define (reverse-digits n)
+  (define (helper iter result)
+    (if (= iter 0)   ; Изчерпали сме напълно iter
+        result       ; Съответно result e напълнен и готов
+        (helper (quotient iter 10)
+                (+ (* result 10)
+                   (remainder iter 10)))))
+  (helper n 0))
 
 (define reverse-digits-tests
   (test-suite

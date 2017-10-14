@@ -1,6 +1,15 @@
 (require rackunit rackunit/text-ui)
 
+; Единствената разлика с count-digits е в изчисляването на новия result.
 
+(define (sum-digits n)
+  (define (helper iter result)
+    (if (= iter 0)
+        result
+        (helper (quotient iter 10)
+                (+ result
+                   (remainder iter 10)))))
+  (helper n 0))
 
 (define sum-digits-tests
   (test-suite

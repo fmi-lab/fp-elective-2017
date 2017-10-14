@@ -1,6 +1,12 @@
 (require rackunit rackunit/text-ui)
 
-
+(define (count-digits n)
+  (define (helper iter result)
+    (if (= iter 0)
+        result
+        (helper (quotient iter 10)
+                (+ result 1))))
+  (helper n 0))
 
 (define count-digits-tests
   (test-suite

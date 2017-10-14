@@ -1,6 +1,17 @@
 (require rackunit rackunit/text-ui)
 
+(define (count-divisors n)
+  (define (helper iter result)
+    (if (= iter 0)
+        result
+        (helper (- iter 1)
+                (if (= (remainder n iter) 0)
+                    (+ result 1)
+                    result))))
+  (helper n 0))
 
+(define (prime? n)
+  (= 2 (count-divisors n)))
 
 (define prime?-tests
   (test-suite
