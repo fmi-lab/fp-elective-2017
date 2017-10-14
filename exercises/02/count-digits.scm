@@ -12,6 +12,6 @@
    (check = (count-digits 666) 3)
    (check = (count-digits 1337) 4)
    (check = (count-digits 65510) 5)
-   (check = (count-digits 8833443388) 10)
+   (check = (count-digits 8833443388) 10)))
 
 (run-tests count-digits-tests)
