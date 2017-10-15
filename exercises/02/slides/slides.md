@@ -39,8 +39,14 @@ html, body, div, p { font-family: Helvetica; }
   - получава се верига от отложени операции
 - свиване
   - извършване на умноженията
-- време – O(n)
-- памет – O(n)
+
+---
+
+# Линейни рекурсивни процеси
+
+- сложност
+  - време – O(n)
+  - памет – O(n)
 - реализация – информацията за състоянието на процеса се пази в стек
 
 ---
@@ -127,3 +133,55 @@ int factorial(int n) {
 ## Визуализация на процеса за `(factorial 6)`
 
 ![80% center](images/factorial-iterative-process.png)
+
+---
+
+# Линейни итеративни процеси
+
+- сложност
+  - време – O(n)
+  - памет – O(1)
+
+---
+
+# Влагане на дефиниции
+
+## Скриване на имплементационните детайли
+
+```scheme
+(define (factorial n)
+  (define (fact-iter product counter max-count)
+    (if (> counter max-count)
+        product
+        (fact-iter (* counter product)
+                   (+ counter 1)
+                   max-count)))
+
+  (fact-iter 1 1 n))
+```
+
+---
+
+# Влагане на дефиниции
+
+- процедурата `fact-iter` е помощна за реализацията на `factorial`
+- не е предвидена да бъде използвана от потребителя
+- затова можем да я скрием в блока на процедурата `factorial`
+- блоковата структура ни помага да организираме програмите, които пишем
+
+---
+
+# Влагане на дефиниции
+
+## Използване на аргументите на външната процедура във вътрешните
+
+```scheme
+(define (factorial n)
+  (define (fact-iter product counter)
+    (if (> counter n)
+        product
+        (fact-iter (* counter product)
+                   (+ counter 1))))
+
+  (fact-iter 1 1))
+```
