@@ -56,3 +56,9 @@ f(n, k) = 42 + max(f(n - 1, k) + 1,
 # Разделяй и владей
 
 ![](images/divide-and-conquer.png)
+
+---
+
+# (fib 5)
+
+![](images/fib.png)
