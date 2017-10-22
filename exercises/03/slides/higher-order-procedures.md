@@ -12,16 +12,16 @@ $$\sum_{x = a}^b x$$
 
 ---
 
-# Сума
+# Сума... на целите числа
 
 $$\sum_{x = a}^b x$$
 
 ```scheme
-(define (sum a b)
+(define (sum-integers a b)
   (if (> a b)
       0
       (+ a
-         (sum (+ a 1) b))))
+         (sum-integers (+ a 1) b))))
 ```
 
 ---
@@ -48,21 +48,7 @@ $$\sum_{x = a}^b x^2$$
 (define (sum-squares a b)
   (if (> a b)
       0
-      (+ (* a a)
-         (sum-squares (+ a 1) b))))
-```
-
----
-
-# Сума... на дроби
-
-$$\sum_{x = a}^b \frac{1}{x^4 + 1}$$
-
-```scheme
-(define (sum-squares a b)
-  (if (> a b)
-      0
-      (+ ...
+      (+ (square a)
          (sum-squares (+ a 1) b))))
 ```
 
@@ -76,8 +62,22 @@ $$\sum_{x = a}^b \frac{1}{x^4 + 1}$$
 (define (sum-fractions a b)
   (if (> a b)
       0
+      (+ ...
+         (sum-fractions (+ a 1) b))))
+```
+
+---
+
+# Сума... на дроби
+
+$$\sum_{x = a}^b \frac{1}{x^4 + 1}$$
+
+```scheme
+(define (sum-fractions a b)
+  (if (> a b)
+      0
       (+ (/ 1
-      	    (square (square a)))
+            (+ (square (square a)) 1))
          (sum-fractions (+ a 1) b))))
 ```
 
@@ -85,7 +85,8 @@ $$\sum_{x = a}^b \frac{1}{x^4 + 1}$$
 
 # Обобщение
 
-$$\sum_{x = a}^b x
+$$
+\sum_{x = a}^b x
 
 \qquad
 
@@ -100,14 +101,14 @@ $$\sum_{x = a}^b x
 \qquad
 \qquad
 \qquad
-
 $$
 
 ---
 
 # Обобщение
 
-$$\sum_{x = a}^b x
+$$
+\sum_{x = a}^b x
 
 \qquad
 
@@ -131,11 +132,11 @@ $$
 $$\sum_{x = a}^b f(x)$$
 
 ```scheme
-(define (sum a b f)
-  (if (> a b)
+(define (sum f a b)
+  (if (> f a b)
       0
       (+ (f a)
-         (sum (+ a 1) b f))))
+         (sum f (+ a 1) b))))
 ```
 
 ---
@@ -146,31 +147,11 @@ $$\sum_{x = a}^b f(x)$$
 $$\sum_{x = a}^b term(x)$$
 
 ```scheme
-(define (sum a b term)
+(define (sum term a b)
   (if (> a b)
       0
       (+ (term a)
-         (sum (+ a 1) b term))))
-```
-
----
-
-# lambda λ
-
-```scheme
-(define (square x) (* x x))
-```
-
-```scheme
-(define square (lambda (x) (* x x)))
-```
-
-```scheme
-(sum 1 5 square) ; 55
-```
-
-```scheme
-(sum 1 5 (lambda (x) x)) ; 15
+         (sum term (+ a 1) b))))
 ```
 
 ---
@@ -178,24 +159,33 @@ $$\sum_{x = a}^b term(x)$$
 # По-абстрактна сума
 
 ```scheme
+(define (identity x) x)
+
 (define (sum-integers a b)
-  (sum a b (lambda (x) x)))
+  (sum identity a b))
 ```
 
 ```scheme
+(define (square x) (* x x))
+
 (define (sum-squares a b)
-  (sum a b square))
+  (sum square a b))
 ```
 
 ```scheme
+(define (cube x) (* x x x))
+
 (define (sum-cubes a b)
-  (sum a b cube))
+  (sum cube a b))
 ```
 
 ```scheme
 (define (sum-fractions a b)
-  (sum a b (lambda (x) (/ 1
-                          (square (square x))))))
+  (define (term x)
+    (/ 1
+       (+ (square (square x)) 1)))
+
+  (sum term a b))
 ```
 
 ---
@@ -208,14 +198,14 @@ $$\prod_{x = a}^b f(x)$$
 
 # Произведение
 
-$$\prod_{x = a}^b f(x)$$
+$$\prod_{x = a}^b term(x)$$
 
 ```scheme
-(define (product a b f)
+(define (product term a b)
   (if (> a b)
       0
-      (* (f a)
-         (product (+ a 1) b f))))
+      (* (term a)
+         (product term (+ a 1) b))))
 ```
 
 ---
@@ -223,32 +213,36 @@ $$\prod_{x = a}^b f(x)$$
 # (* Произведение 0) ?
 
 ```scheme
-(product 1 5 (lambda (x) x)) ; 0
+(define (identity x) x)
+
+(product identity 1 5) ; 0
 ```
 
 ```scheme
-(product 2 3 square) ; 0
+(define (square x) (* x x))
+
+(product square 2 3) ; 0
 ```
 
 ```scheme
 (define (identity x) x)
 
 (define (factorial n)
-  (product 1 n identity))
+  (product identity 1 n))
 ```
 
 ---
 
 # (* Произведение 1)
 
-$$\prod_{x = a}^b f(x)$$
+$$\prod_{x = a}^b term(x)$$
 
 ```scheme
-(define (product a b f)
+(define (product term a b)
   (if (> a b)
       1
       (* (f a)
-         (product (+ a 1) b f))))
+         (product term (+ a 1) b))))
 ```
 
 ---
@@ -270,15 +264,15 @@ $$
 $$
 
 ```scheme
-(define (accumulate null-value a b term combiner)
+(define (accumulate combiner null-value term a b)
   (if (> a b)
       null-value
       (combiner (term a)
-                (accumulate null-value
-                            (+ a 1)
-                            b
+                (accumulate combiner
+                            null-value
                             term
-                            combiner))))
+                            (+ a 1)
+                            b))))
 ```
 
 ---
@@ -289,23 +283,61 @@ $$
 
 ---
 
-# accumulate
+# Да дефинираме `sum` и `product` чрез `accumulate`
 
 ```scheme
+(define (sum term a b)
+  (accumulate + 0 term a b))
+
+(define (product term a b)
+  (accumulate + 1 term a b))
+```
+
+---
+
+# Или нещо по-конкретно
+
+```scheme
+(define (square x) (* x x))
+
 (define (sum-squares a b)
-  (accumulate 0 a b square +))
+  (accumulate + 0 square a b))
 ```
 
 ```scheme
+(define (cube x) (* x x x))
+
 (define (product-cubes a b)
-  (accumulate 1 a b cube *))
+  (accumulate * 1 cube a b))
 ```
 
 ```scheme
-(define (average a b) ; бинарна процедура
-  (/ (+ a b) 2))
+(define (average x y) ; бинарна процедура
+  (/ (+ x y) 2))
+
+(define (identity x) x)
 
 (define (fractions a b)
-  (accumulate 0 a b (lambda (x) x) average))
+  (accumulate average 0 identity a b))
 ```
 
+---
+
+# λ
+## Създаване на процедури чрез `lambda`
+
+```scheme
+(define (square x) (* x x))
+```
+
+```scheme
+(define square (lambda (x) (* x x)))
+```
+
+```scheme
+(sum 1 5 square) ; 55
+```
+
+```scheme
+(sum 1 5 (lambda (x) x)) ; 15
+```
