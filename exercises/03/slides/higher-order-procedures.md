@@ -345,6 +345,7 @@ $$
 ---
 
 # λ
+## Как да четем lambda
 
 ![cetner 150%](images/reading-lambda.png)
 
