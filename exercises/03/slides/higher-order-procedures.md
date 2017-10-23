@@ -341,3 +341,11 @@ $$
 ```scheme
 (sum 1 5 (lambda (x) x)) ; 15
 ```
+
+---
+
+# λ
+
+![cetner 150%](images/reading-lambda.png)
+
+![150%](images/square.png)
