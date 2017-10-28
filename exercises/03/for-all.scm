@@ -4,8 +4,8 @@
   (test-suite
     "Tests for for-all?"
 
-    (check-true (for-all? (lambda (x) (> x 0) 2 98)))
-    (check-true (for-all? (lambda (x) (< x 0) -10 -1)))
+    (check-true (for-all? (lambda (x) (> x 0)) 2 98))
+    (check-true (for-all? (lambda (x) (< x 0)) -10 -1))
     (check-true (for-all? (lambda (x) (= 0 (* x 0))) -3 15))
     (check-true (for-all? (lambda (x) (= 0 (* x 1))) 2 1))
 
