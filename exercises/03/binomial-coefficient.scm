@@ -2,7 +2,7 @@
 
 (define binomial-coefficient-tests
   (test-suite
-   "Tests for binomial-coefficient"
+    "Tests for binomial-coefficient"
 
     (check = (binomial-coefficient 1 1) 1)
     (check = (binomial-coefficient 2 1) 1)
