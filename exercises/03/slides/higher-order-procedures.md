@@ -133,7 +133,7 @@ $$\sum_{x = a}^b f(x)$$
 
 ```scheme
 (define (sum f a b)
-  (if (> f a b)
+  (if (> a b)
       0
       (+ (f a)
          (sum f (+ a 1) b))))
