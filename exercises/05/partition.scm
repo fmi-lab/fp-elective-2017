@@ -11,7 +11,7 @@
     (check = (partition odd? '(3))
              '((3) ()))
     (check = (partition even? '())
-             '())
+             '(() ()))
     (check = (partition (lambda (x) (< x 4))
                         '(1 2 3 4 5 6 7))
              '((1 2 3) (4 5 6 7)))
