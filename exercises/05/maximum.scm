@@ -1,5 +1,26 @@
 (require rackunit rackunit/text-ui)
 
+(define (maximum l)
+  (if (null? (cdr l))
+      (car l)
+      (max (car l) (maximum (cdr l)))))
+
+(define (accumulate l combiner null-value term)
+  (define (iter l result)
+    (if (null? l)
+        result
+        (iter (cdr l)
+              (combiner result
+                        (term (car l))))))
+
+  (iter l null-value))
+
+(define (identity x) x)
+
+; Решение, което използва accumulate
+(define (maximum l)
+  (accumulate l max (car l) identity))
+
 (define maximum-tests
   (test-suite
     "Tests for maximum"
