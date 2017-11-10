@@ -1,5 +1,17 @@
 (require rackunit rackunit/text-ui)
 
+(define (remove l x)
+  (define (iter checked rest)
+    (cond ((or (null? rest)
+               (not (eq? (car rest) x)))
+           (iter (cons (car rest) checked)
+                 (cdr rest)))
+          ((eq? (car rest) x)
+           (append (reverse checked)
+                   (cdr rest)))))
+
+  (iter '() l))
+
 (define remove-tests
   (test-suite
     "Tests for remove"

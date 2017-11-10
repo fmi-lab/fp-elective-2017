@@ -17,7 +17,6 @@
 
 (define (identity x) x)
 
-; Решение, което използва accumulate
 (define (maximum l)
   (accumulate l max (car l) identity))
 

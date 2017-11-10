@@ -1,5 +1,24 @@
 (require rackunit rackunit/text-ui)
 
+(define (maximum l)
+  (if (null? (cdr l))
+      (car l)
+      (max (car l) (maximum (cdr l)))))
+
+(define without remove)
+
+; итеративно решение, което преизползва maximum
+; използваме let, за да пресметнем максимума само веднъж
+; итерацията ни дава сортирания списък в обратен ред
+(define (selection-sort list)
+  (define (iter sorted unsorted)
+    (if (null? unsorted)
+        sorted
+        (let ((max (maximum unsorted)))
+             (iter (cons max sorted)
+                   (without max unsorted)))))
+  (iter '() list))
+
 (define selection-sort-tests
   (test-suite
     "Tests for selection-sort"
