@@ -1,5 +1,10 @@
 (require rackunit rackunit/text-ui)
 
+(define (flatten l)
+  (cond ((null? l)       '())
+        ((list? (car l)) (append (car l) (flatten (cdr l))))
+        (else            (cons   (car l) (flatten (cdr l))))))
+
 (define flatten-tests
   (test-suite
     "Tests for flatten"
