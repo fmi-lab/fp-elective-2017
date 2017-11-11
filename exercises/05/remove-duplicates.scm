@@ -1,5 +1,21 @@
 (require rackunit rackunit/text-ui)
 
+(define (member? x l)
+  (and (not (null? l))
+       (or (eq? (car l) x)
+           (member? x (cdr l)))))
+
+(define (remove-duplicates l)
+  (define (iter unique remaining)
+    (cond ((null? remaining) unique)
+          ((member? (car remaining) unique)
+            (iter unique
+                  (cdr remaining)))
+          (else
+            (iter (cons (car remaining) unique)
+                  (cdr remaining)))))
+  (reverse (iter '() l)))
+
 (define remove-duplicates-tests
   (test-suite
     "Tests for remove-duplicates"
