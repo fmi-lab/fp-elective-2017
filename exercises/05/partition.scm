@@ -1,5 +1,12 @@
 (require rackunit rackunit/text-ui)
 
+(define (compose f g)
+  (lambda (x) (f (g x))))
+
+(define (partition predicate l)
+  (cons (filter predicate l)
+        (list (filter (compose not predicate) l))))
+
 (define partition-tests
   (test-suite
     "Tests for partition"
