@@ -39,6 +39,11 @@
       (let ((prefix (longest-descending-prefix l)))
         (iter (length prefix) prefix (cdr l)))))
 
+(define (suffixes l)
+  (foldl (lambda (_ acc) (cons (cdar acc) acc))
+         (list l)
+         l))
+
 (define longest-descending-tests
   (test-suite
    "Tests for longest-descending"
