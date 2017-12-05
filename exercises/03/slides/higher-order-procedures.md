@@ -290,7 +290,7 @@ $$
   (accumulate + 0 term a b))
 
 (define (product term a b)
-  (accumulate + 1 term a b))
+  (accumulate * 1 term a b))
 ```
 
 ---
