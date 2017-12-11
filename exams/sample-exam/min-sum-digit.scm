@@ -22,12 +22,15 @@
 (define (min-sum-digit a b k)
   (define (digit-sum-divisible-by-k? number)
     (zero? (remainder (sum-digits number) k)))
-  (let* ((numbers (range a (+ b 1)))
-         (divisible (filter digit-sum-divisible-by-k? numbers)))
-    (apply min divisible)))
 
-; Note: accumulate can also be used for this problem
-; where the null value is the maximum integer
+  (define numbers (range a (+ b 1)))
+
+  (define divisible (filter digit-sum-divisible-by-k? numbers))
+
+  (apply min divisible))
+
+; Забележка: accumulate също може да се използва за решаването на задачата,
+; където null-value ще бъде максималното цяло число
 
 (define min-sum-digit-tests
   (test-suite

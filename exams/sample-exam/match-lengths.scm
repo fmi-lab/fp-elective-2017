@@ -27,10 +27,10 @@
                                            (length b))))
                                  l1
                                  l2)))
-    (eq? (length (filter (lambda (x)
-                           (eq? x (car length-differences)))
-                         length-differences))
-         (length l1))))
+    (= (length (filter (lambda (x)
+                         (= x (car length-differences)))
+                       length-differences))
+       (length l1))))
 
 
 ; 2nd solution

@@ -7,23 +7,31 @@
 ; Функцията да конструира списък с броя на срещанията на всеки от елементите на l1 в l2.
 ; Пример: (occurrences ‘(1 2 3) ‘( 1 2 4 1 )) -> (2 1 0)
 
-(define (accumulate l combiner null-value term)
-  (if (null? l)
-      null-value
-      (combiner (term (car l))
-                (accumulate (cdr l) combiner null-value term))))
+; (define (accumulate l combiner null-value term)
+;   (if (null? l)
+;       null-value
+;       (combiner (term (car l))
+;                 (accumulate (cdr l) combiner null-value term))))
+
+; Дефиниция на count чрез accumulate над списъци
+; (define (count elem l)
+;   (accumulate l + 0 (lambda (x) (if (= elem x) 1 0))))
 
 (define (count elem l)
-  (accumulate l + 0 (lambda (x) (if (eq? elem x) 1 0))))
+  (foldl (lambda (x acc)
+           (+ acc
+              (if (= elem x) 1 0)))
+         0
+         l))
 
 (define (occurrences l1 l2)
   (map (lambda (x) (count x l2)) l1))
 
 
-; Solution without accumulate, using lists with map, filter and length
+; Решение, използващи списъци, map, filter и length
 (define (occurrences-map l1 l2)
-  (define (is-equal-to elem)
-    (lambda (x) (eq? x elem)))
+  (define (is-equal-to elem)  ; в Haskell имаме частично прилагане на функции
+    (lambda (x) (= x elem)))
 
   (map (lambda (x1) (length (filter (is-equal-to x1) l2)))
        l1))
