@@ -8,9 +8,7 @@
       #f))
 
 (define (insert-at l index x)
-  (define-values (before after) (split-at l index))
-
-  (append before (cons x after)))
+  (append (take l index) (cons x (drop l index))))
 
 (define (row-reduce matrix)
   (define first-row-with-non-zero-first-element

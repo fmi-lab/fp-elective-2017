@@ -1,9 +1,7 @@
 (require rackunit rackunit/text-ui)
 
 (define (remove-at l index)
-  (define-values (before after) (split-at l index))
-
-  (append before (cdr after)))
+  (append (take l index) (drop l (+ index 1))))
 
 (define (remove-column matrix index)
   (map (lambda (row) (remove-at row index))
