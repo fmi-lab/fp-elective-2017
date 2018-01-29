@@ -6,7 +6,7 @@ type TVProgram = [TVShow]
 
 isSorted :: Ord a => [a] -> Bool
 isSorted [] = True
-isSorted [x] = True
+isSorted [_] = True
 isSorted (x : y : rest) = x <= y && isSorted (y : rest)
 
 isProgram :: TVProgram -> Bool
