@@ -17,13 +17,13 @@
         ((all-extrema-same-as? (car maximums)) (car maximums))
         (else 0)))
 
-(define middle-digits-tests
+(define extremum-tests
   (test-suite
-   "Tests for middle-digits"
+   "Tests for extremum"
 
    (check = (extremum '((1 2 3 2) (3 5) (3 3) (1 1 3 3))) 3)
    (check = (extremum '((1 2 3 2) (1 3 5) (0 1) (1 1 3 3))) 1)
    (check = (extremum '((0 0 3 2) (0 3 5) (0 1) (1 1 0 3))) 0)
    (check = (extremum '((1 2 3 2) (2 3 5) (3 3) (2 2 3 3))) 0)))
 
-(run-tests middle-digits-tests)
+(run-tests extremum-tests)
